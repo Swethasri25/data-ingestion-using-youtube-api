@@ -1,17 +1,21 @@
+from dotenv import load_dotenv
 import mysql.connector
 import pandas as pd
+import os
 
 # Read CSV data
 df = pd.read_csv('cleaned_video_stats.csv')
 
 df['Published Date'] = pd.to_datetime(df['Published Date'], errors='coerce').dt.strftime('%Y-%m-%d %H:%M:%S')
 
+load_dotenv()
+
 # Connect to MySQL
 conn = mysql.connector.connect(
-    host='127.0.0.1',
-    user='root',
-    password='root12345',  # Replace with your root password
-    database='youtube_data'
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME")
 )
 
 cursor = conn.cursor()
