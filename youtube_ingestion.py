@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from channel_id import get_channel_id_from_video
 import requests
 import pandas as pd
 import os
@@ -7,7 +8,14 @@ load_dotenv()
 
 # Replace with your actual API key
 API_KEY = os.getenv("YOUTUBE_API_KEY")
-CHANNEL_ID = 'UCq9kaXFyF2b6oXQ5veWdvog'  # Netflix example
+video_url = "https://www.youtube.com/watch?v=1vPPnZggrkw&ab_channel=AyeJude"
+CHANNEL_ID = get_channel_id_from_video(video_url)  # Aye Jude example UCq9kaXFyF2b6oXQ5veWdvog
+
+if CHANNEL_ID:
+    print(f"✅ Fetched Channel ID: {CHANNEL_ID}")
+    # You can now use this channel_id for further API calls
+else:
+    print("❌ Channel ID not found")
 
 url = f"https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id={CHANNEL_ID}&key={API_KEY}"
 

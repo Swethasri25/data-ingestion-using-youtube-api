@@ -7,10 +7,10 @@ import os
 load_dotenv()
 
 API_KEY = os.getenv("YOUTUBE_API_KEY")
-CHANNEL_ID = 'UCq9kaXFyF2b6oXQ5veWdvog'  # Netflix
+CHANNEL_ID = 'UCq9kaXFyF2b6oXQ5veWdvog'  # Aye Jude 
 
 # 1. Get video IDs from the channel
-search_url = f'https://www.googleapis.com/youtube/v3/search?key={API_KEY}&channelId={CHANNEL_ID}&part=snippet,id&order=date&maxResults=10'
+search_url = f'https://www.googleapis.com/youtube/v3/search?key={API_KEY}&channelId={CHANNEL_ID}&part=snippet,id&order=date&maxResults=50'
 
 search_response = requests.get(search_url)
 search_data = search_response.json()
